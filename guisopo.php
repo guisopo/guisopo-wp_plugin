@@ -5,13 +5,13 @@
 
  /*
   Plugin Name: Guisopo Plugin
-  Plugin URI: http://www.guisopo.com/Guisopo
+  Plugin URI: http://www.guisopo.com/guisopo
   Description: Tutorial plugin
   Version: 1.0.0
   Author: Guisopo
   Author URI: http://www.guisopo.com
   License: GPLv2 or later
-  Text Domain: http://www.guisopo.com/Guisopo
+  Text Domain: http://www.guisopo.com/guisopo
   */
 
 // ABSPATH  is a constant variable defined by WP when initializing WP site and carries
@@ -20,7 +20,7 @@
   defined ( 'ABSPATH' ) or die('You cannot acces this file!');
 
 // We check if the class exists. Safety precation recommended in PHP
-if( class_exists( 'GuisopoPlugin' ) ){
+if( !class_exists( 'GuisopoPlugin' ) ){
 
   class GuisopoPlugin
   {
@@ -30,7 +30,7 @@ if( class_exists( 'GuisopoPlugin' ) ){
     }
 
     public function add_admin_pages() {
-      add_menu_page( 'Aewsome Plugin', 'Awesome', 'manage_options', 'awesome_plugin', array($this, 'admin_index'), '', null);
+      add_menu_page( 'Aewsome Plugin', 'Awesome', 'manage_options', 'awesome_plugin', array($this, 'admin_index'), 'dashicons-store', 110);
     }
 
     public function admin_index() {

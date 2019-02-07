@@ -32,8 +32,25 @@ if( class_exists( 'GuisopoPlugin' ) ){
       register_post_type('book', ['public'=> true, 'label'=> 'Books']);
     }
 
+    function activate() {
+      require_once plugin_dir_path(__FILE__) . 'includes/guisopo-plugin-activate.php';
+      GuisopoPluginActivate::activate;
+    }
+
   }
 
   // We store the initialization of the class in a variable because then we can call it in other sections
-  $GuisopoPlugin = new GuisopoPlugin();
+  $guisopoPlugin = new GuisopoPlugin();
+  $guisopoPlugin->register();
+
+  // ACTIVATION
+  // __FILE__ is a global variable
+  register_activation_hook( __FILE__, array($guisopoPlugin, 'activate') );
+  
+  // DEACTIVATION
+  require_once plugin_dir_path(__FILE__) . 'includes/guisopo-plugin-deactivate.php';
+  register_deactivation_hook( __FILE__, array('guisopoPluginDeactivate', 'deactivate') );
+
+}
+
 }

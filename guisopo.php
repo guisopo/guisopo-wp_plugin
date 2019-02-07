@@ -26,6 +26,15 @@ if( class_exists( 'GuisopoPlugin' ) ){
   {
     function register() {
       add_action('admin_enqueue_scripts', array($this, 'enqueue') );
+      add_action('admin_menu', array($this, 'add_admin_pages') );
+    }
+
+    public function add_admin_pages() {
+      add_menu_page( 'Aewsome Plugin', 'Awesome', 'manage_options', 'awesome_plugin', array($this, 'admin_index'), '', null);
+    }
+
+    public function admin_index() {
+      //require template
     }
 
     protected function create_post_type() {

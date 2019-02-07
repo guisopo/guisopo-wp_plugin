@@ -14,7 +14,7 @@
   Text Domain: http://www.guisopo.com/guisopo
   */
 
-// ABSPATH  is a constant variable defined by WP when initializing WP site and carries
+  // ABSPATH  is a constant variable defined by WP when initializing WP site and carries
   // itself during the WP installation ONLY IF is the software itself who is accesing the php file.
   // If something else external from the website is accesing those files ABSPATH is not defined
   defined ( 'ABSPATH' ) or die('You cannot acces this file!');
@@ -24,17 +24,35 @@ if( !class_exists( 'GuisopoPlugin' ) ){
 
   class GuisopoPlugin
   {
+    public $plugin;
+
+    function __construct() {
+      $this->plugin = plugin_basename(__FILE__);
+    }
+
     function register() {
       add_action('admin_enqueue_scripts', array($this, 'enqueue') );
+
       add_action('admin_menu', array($this, 'add_admin_pages') );
+
+      add_filter("plugin_action_links_$this->plugin", array($this, 'settings_link') );
+    }
+
+    public function settings_link( $links ) {
+      // add custom settings link
+      $settings_link = '<a href="admin.php?page=guisopo_plugin">Settings</a>';
+
+      array_push( $links, $settings_link);
+      return $links;
     }
 
     public function add_admin_pages() {
-      add_menu_page( 'Aewsome Plugin', 'Awesome', 'manage_options', 'awesome_plugin', array($this, 'admin_index'), 'dashicons-store', 110);
+      add_menu_page( 'Guisopo Plugin', 'Guisopo', 'manage_options', 'guisopo_plugin', array($this, 'admin_index'), 'dashicons-store', 110);
     }
 
     public function admin_index() {
       //require template
+      require_once plugin_dir_path(__FILE__) . 'templates/admin.php';
     }
 
     protected function create_post_type() {
@@ -47,7 +65,7 @@ if( !class_exists( 'GuisopoPlugin' ) ){
 
     function activate() {
       require_once plugin_dir_path(__FILE__) . 'includes/guisopo-plugin-activate.php';
-      GuisopoPluginActivate::activate;
+      GuisopoPluginActivate::activate();
     }
 
     function enqueue() {

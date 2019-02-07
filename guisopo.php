@@ -52,5 +52,3 @@ if( class_exists( 'GuisopoPlugin' ) ){
   register_deactivation_hook( __FILE__, array('guisopoPluginDeactivate', 'deactivate') );
 
 }
-
-}

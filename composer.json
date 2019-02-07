@@ -1,0 +1,14 @@
+{
+    "name": "guillermosolerpoquet/guisopo",
+    "description": "Starter Plugin Example",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "guisopo",
+            "email": "solerguillermo@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

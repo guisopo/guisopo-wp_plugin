@@ -24,6 +24,10 @@ if( class_exists( 'GuisopoPlugin' ) ){
 
   class GuisopoPlugin
   {
+    function register() {
+      add_action('admin_enqueue_scripts', array($this, 'enqueue') );
+    }
+
     protected function create_post_type() {
       add_action( 'init', array( $this, 'custom_post_type') );
     }
@@ -35,6 +39,12 @@ if( class_exists( 'GuisopoPlugin' ) ){
     function activate() {
       require_once plugin_dir_path(__FILE__) . 'includes/guisopo-plugin-activate.php';
       GuisopoPluginActivate::activate;
+    }
+
+    function enqueue() {
+      // enqueue all our scripts
+      wp_enqueue_style('main.css', plugins_url('/assets/main.css', __FILE__) );
+      wp_enqueue_script('index.js', plugins_url('/assets/index.js', __FILE__) );
     }
 
   }

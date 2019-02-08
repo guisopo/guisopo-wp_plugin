@@ -4,28 +4,44 @@
  */
 namespace Inc\Pages;
 
-use \Inc\Base\BaseController;
 use \Inc\Api\SettingsApi;
+use \Inc\Base\BaseController;
+use \Inc\Api\Callbacks\AdminCallbacks;
 
 class Admin extends BaseController
 {
   public $settings;
   public $pages = array();
   public $subpages = array();
+  public $callbacks;
 
-  public function __construct() {
+  public function register() {
     $this->settings = new SettingsApi();
+
+    $this->callbacks = new AdminCallbacks();
+
+    $this->setPages();
+    
+    $this->setSubpages();
+
+    $this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubpages( $this->subpages )->register();
+  }
+
+  public function setPages() {
     $this->pages = [ 
       [
         'page_title' => 'Guisopo Plugin',
         'menu_title' => 'Guisopo',
         'capability' => 'manage_options',
         'menu_slug' => 'guisopo_plugin',
-        'callback' => function() {echo '<h1>Guisopo Plugin</h1>'; },
+        'callback' => array( $this->callbacks, 'adminDashboard'),
         'icon_url' => 'dashicons-store',
         'position' => 110
       ]
     ];
+  }
+
+  public function setSubpages() {
     $this->subpages = [
       [ 
         'parent_slug' => 'guisopo_plugin',
@@ -52,9 +68,5 @@ class Admin extends BaseController
         'callback' => function() {echo '<h1>Widgets Manager</h1>'; },
       ]
       ];
-  }
-
-  public function register() {
-    $this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubpages( $this->subpages )->register();
   }
 }

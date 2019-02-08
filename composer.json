@@ -1,6 +1,6 @@
 {
     "name": "guillermosolerpoquet/guisopo",
-    "description": "Starter Plugin Example",
+    "description": "Starter Plugin Author",
     "type": "project",
     "license": "GPL",
     "authors": [
@@ -12,8 +12,6 @@
     "minimum-stability": "dev",
     "require": {},
     "autoload": {
-        "psr-4": {
-            "Inc\\": "./inc"
-        }
+        "psr-4": {"Inc\\": "./inc"}
     }
 }

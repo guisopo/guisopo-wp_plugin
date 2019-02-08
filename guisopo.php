@@ -19,6 +19,17 @@
   // If something else external from the website is accesing those files ABSPATH is not defined
   defined ( 'ABSPATH' ) or die('You cannot acces this file!');
 
+
+// Autoload Composer
+if( file_exists( dirname( __FILE__) . '/vendor/autoload.php' ) ) {
+  // now with the autoload we can define a namespace and reference that file through its own namespace without requiring the actual file
+  require_once dirname( __FILE__) . '/vendor/autoload.php';
+}
+
+use Inc\Activate;
+use Inc\Deactivate;
+use Inc\AdminPages;
+
 // We check if the class exists. Safety precation recommended in PHP
 if( !class_exists( 'GuisopoPlugin' ) ){
 
@@ -64,8 +75,9 @@ if( !class_exists( 'GuisopoPlugin' ) ){
     }
 
     function activate() {
-      require_once plugin_dir_path(__FILE__) . 'includes/guisopo-plugin-activate.php';
-      GuisopoPluginActivate::activate();
+      // We don't need require_once because of composer autoload
+      // require_once plugin_dir_path(__FILE__) . 'includes/guisopo-plugin-activate.php';
+      Activate::activate();
     }
 
     function enqueue() {
@@ -85,7 +97,8 @@ if( !class_exists( 'GuisopoPlugin' ) ){
   register_activation_hook( __FILE__, array($guisopoPlugin, 'activate') );
   
   // DEACTIVATION
-  require_once plugin_dir_path(__FILE__) . 'includes/guisopo-plugin-deactivate.php';
-  register_deactivation_hook( __FILE__, array('guisopoPluginDeactivate', 'deactivate') );
+  // We don't need require_once because of composer autoload
+  // require_once plugin_dir_path(__FILE__) . 'includes/guisopo-plugin-deactivate.php';
+  register_deactivation_hook( __FILE__, array('Deactivate', 'deactivate') );
 
 }

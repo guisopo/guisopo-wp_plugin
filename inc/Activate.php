@@ -2,8 +2,8 @@
 /**
  * @package GuisopoPlugin
  */
-
-class GuisopoPluginActivate
+namespace Inc;
+class Activate
 {
   public static function activate() {
     // create CPT. Find this method only inside the class

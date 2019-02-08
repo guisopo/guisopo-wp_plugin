@@ -20,17 +20,32 @@
   defined ( 'ABSPATH' ) or die('You cannot acces this file!');
 
 
-// Autoload Composer
+// Require once Composer Autoload
 if( file_exists( dirname( __FILE__) . '/vendor/autoload.php' ) ) {
   // now with the autoload we can define a namespace and reference that file through its own namespace without requiring the actual file
   require_once dirname( __FILE__) . '/vendor/autoload.php';
 }
 
-// We define globally the plugin path so we can reference it in differnt files
-define( 'PLUGIN_PATH', plugin_dir_path(__FILE__));
-// We define globally the plugin url for the wp_enqueue_script/style methods because the dont accept PLUGIN_PATH
-define( 'PLUGIN_URL', plugin_dir_url(__FILE__));
+/**
+ * Code that runs during activation
+ * WP requires the activation and deactivation hooks to be called outside a class
+ */
+function activate_guisopo_plugin() {
+  Inc\Base\Activate::activate();
+}
+register_activation_hook(__FILE__, 'activate_guisopo_plugin');
 
+/**
+ * Code that runs during deactivation
+ */
+function deactivate_guisopo_plugin() {
+  Inc\Base\Deactivate::deactivate();
+}
+register_deactivation_hook(__FILE__, 'deactivate_guisopo_plugin');
+
+/**
+ * Initialize all the core classes of the plugin
+ */
 if( class_exists( 'Inc\\Init' ) ) {
   Inc\Init::register_services();
 }

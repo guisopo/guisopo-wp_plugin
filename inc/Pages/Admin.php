@@ -3,20 +3,31 @@
  * @package GuisopoPlugin
  */
 namespace Inc\Pages;
+
 use \Inc\Base\BaseController;
+use \Inc\Api\SettingsApi;
 
 class Admin extends BaseController
 {
+  public $settings;
+  public $pages = array();
+
+  public function __construct() {
+    $this->settings = new SettingsApi();
+    $this->pages = [ 
+      [
+        'page_title' => 'Guisopo Plugin',
+        'menu_title' => 'Guisopo',
+        'capability' => 'manage_options',
+        'menu_slug' => 'guisopo_plugin',
+        'callback' => function() {echo '<h1>Hola</h1>'; },
+        'icon_url' => 'dashicons-store',
+        'position' => 110
+      ]
+    ];
+  }
+
   public function register() {
-    add_action('admin_menu', array($this, 'add_admin_pages') );
-  }
-
-  public function add_admin_pages() {
-    add_menu_page( 'Guisopo Plugin', 'Guisopo', 'manage_options', 'guisopo_plugin', array($this, 'admin_index'), 'dashicons-store', 110);
-  }
-
-  public function admin_index() {
-    //require template
-    require_once $this->plugin_path . 'templates/admin.php';
+    $this->settings->addPages( $this->pages )->register();
   }
 }

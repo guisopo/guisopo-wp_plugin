@@ -1,8 +1,6 @@
 <?php
 /**
  * @package GuisopoPlugin
- * This BaseController will not interfere with other plugins if the use the same
- * type of variable names o constant
  */
 
 namespace Inc\Base;

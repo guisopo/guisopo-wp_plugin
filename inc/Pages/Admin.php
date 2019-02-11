@@ -24,6 +24,12 @@ class Admin extends BaseController
     
     $this->setSubpages();
 
+    $this->setSettings();
+
+    $this->setSections();
+
+    $this->setFields();
+
     $this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubpages( $this->subpages )->register();
   }
 
@@ -69,4 +75,48 @@ class Admin extends BaseController
       ]
       ];
   }
+
+  public function setSettings() {
+    $args = [
+        [
+          'option_group' => 'guisopo_options_group',
+          'option_name' => 'text_example',  // same exact name of ID of custom field
+          'callback'  => array($this->callbacks, 'guisopoOptionsGroup')
+        ]
+      ];
+
+      $this->settings->setSettings( $args );
+  }
+
+  public function setSections() {
+    $args = [
+        [
+          'id' => 'guisopo_admin_index',
+          'title' => 'Settings',
+          'callback'  => array($this->callbacks, 'guisopoAdminSection'),
+          'page'  => 'guisopo_plugin'
+        ]
+      ];
+
+      $this->settings->setSections( $args );
+  }
+
+  public function setFields() {
+    $args = [
+        [
+          'id' => 'text_field',
+          'title' => 'Text Field',
+          'callback'  => array($this->callbacks, 'guisopoTextExample'),
+          'page'  => 'guisopo_plugin',
+          'section' => 'guisopo_admin_index',  //  Same as id of the section to be printed
+          'args' => array(
+            'label_for' =>  'text_example',
+            'class' =>  'Example-Class'
+          )
+        ]
+      ];
+
+      $this->settings->setFields( $args );
+  }
+
 }

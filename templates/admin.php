@@ -13,9 +13,9 @@
     <div id="tab-1" class="tab-pane active">
       <form action="options.php" action="post">
         <?php
-          settings_fields( 'guisopo_options_group' ); // setSettings->option_group
-          do_settings_sections( 'guisopo_plugin' ); // setSections->page
-          submit_button();
+          settings_fields( 'guisopo_plugin_settings' );
+					do_settings_sections( 'guisopo_plugin' );
+					submit_button();
         ?>
       </form>
     </div>

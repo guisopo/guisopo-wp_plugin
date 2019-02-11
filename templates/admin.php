@@ -11,7 +11,7 @@
   <div class="tab-content">
 
     <div id="tab-1" class="tab-pane active">
-      <form action="options.php" action="post">
+      <form action="options.php" method="post">
         <?php
           settings_fields( 'guisopo_plugin_settings' );
 					do_settings_sections( 'guisopo_plugin' );

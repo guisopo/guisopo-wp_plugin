@@ -3,10 +3,9 @@ window.addEventListener("load", function() {
 	// store tabs variables
 	var tabs = document.querySelectorAll("ul.nav-tabs > li");
 
-  tabs.forEach(tab => {
-    tab.addEventListener("click", switchTab);
-  });
-  
+	for (var i = 0; i < tabs.length; i++) {
+		tabs[i].addEventListener("click", switchTab);
+	}
 
 	function switchTab(event) {
 		event.preventDefault();
@@ -20,6 +19,7 @@ window.addEventListener("load", function() {
 
 		clickedTab.classList.add("active");
 		document.querySelector(activePaneID).classList.add("active");
-  }
+
+	}
 
 });

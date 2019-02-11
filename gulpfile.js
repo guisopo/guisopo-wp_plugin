@@ -41,17 +41,14 @@ var styleWatch   = './src/scss/**/*.scss';
 var jsWatch      = './src/js/**/*.js';
 var phpWatch     = './**/*.php';
 
-// Tasks
+// Tasksgulp
 gulp.task( 'browser-sync', function() {
-	browserSync.init({
-		proxy: projectURL,
-		https: {
-			key: '/Users/alecaddd/.valet/Certificates/test.dev.key',
-			cert: '/Users/alecaddd/.valet/Certificates/test.dev.crt'
-		},
-		injectChanges: true,
-		open: false
-	});
+    browserSync.init({
+			proxy: "localhost:9999",
+			injectChanges: true,
+			open: false
+		});
+		// gulp.watch("./*.php").on("change", browserSync.reload);
 });
 
 gulp.task( 'styles', function() {

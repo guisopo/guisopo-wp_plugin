@@ -12,4 +12,7 @@ class AdminCallbacks extends BaseController
     return require_once("$this->plugin_path/templates/admin.php");
   }
   
+  public function adminCPT() {
+    echo '<h1>CPT Admin Board</h1>';
+  }
 }

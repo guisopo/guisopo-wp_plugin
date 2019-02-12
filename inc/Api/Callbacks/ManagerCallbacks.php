@@ -13,8 +13,14 @@ class ManagerCallbacks extends BaseController
 		// Video 22
 		$output = array();
 		foreach ( $this->managers as $key => $value ) {
-			// $output[$key] = isset( $input[$key] ) ? true : false;
 			// Video 23: check first comment
+			// The code will work fine if it checks for the value as well as isset() on the checkboxes. 
+			// The reason all the checkboxes change to true when there is no existing data (first time activation) 
+			// is because the options are set the first time (that part of logic is true), but their values differ 
+			// (that is not part of the logic, but should be). The code does not check for values, only if the variable is set. 
+			// So instead of $output[$key] = isset( $input[$key] ) ? true : false;, 
+			// change it to $output[$key] = ( isset( $input[$key] ) && $input[$key] == 1 ) ? true : false; 
+			// and it will work as expected.
 			// $output[$key] = ( isset( $input[$key] ) && $input[$key] == 1 ) ? true : false;
 			// Same as:
 			$output[$key] = ( isset( $input[$key] ) && $input[$key] );

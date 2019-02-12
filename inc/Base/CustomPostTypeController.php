@@ -15,6 +15,10 @@ class CustomPostTypeController extends BaseController
   public $subpages = array();
 
   public function register() {
+    
+    // Interrupt if $activated is false
+    if( ! $this->activated( 'cpt_manager' ) ) return;
+
     $this->settings = new SettingsApi();
 
     $this->callbacks = new AdminCallbacks();

@@ -33,4 +33,11 @@ class BaseController
       'chat_manager' => 'Activate Chat Manager'
     ];
   }
+
+  public function activated( string $key ) {
+    $option = get_option( 'guisopo_plugin' );
+    $activated = ( isset( $option[$key] ) && $option[$key] );
+    
+    return $activated ;
+  }
 }

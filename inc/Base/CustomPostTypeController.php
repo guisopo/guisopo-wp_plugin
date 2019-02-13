@@ -6,10 +6,13 @@ namespace Inc\Base;
 
 use \Inc\Api\SettingsApi;
 use \Inc\Base\BaseController;
+use \Inc\Api\Callbacks\CptCallbacks;
 use \Inc\Api\Callbacks\AdminCallbacks;
 
 class CustomPostTypeController extends BaseController
 {
+  public $settings;
+
   public $callbacks;
 
   public $subpages = array();
@@ -24,8 +27,16 @@ class CustomPostTypeController extends BaseController
     $this->settings = new SettingsApi();
 
     $this->callbacks = new AdminCallbacks();
+    
+    $this->cpt_callbacks = new CptCallbacks();
 
     $this->setSubpages();
+
+    $this->setSettings();
+
+    $this->setSections();
+
+    $this->setFields();
 
     $this->settings->addSubpages( $this->subpages )->register();
 
@@ -48,6 +59,99 @@ class CustomPostTypeController extends BaseController
         'callback' => array( $this->callbacks, 'adminCPT' )
       )
     );
+  }
+
+  public function setSettings() {
+
+    $args = array();
+
+    $args[] = array(
+      'option_group' => 'guisopo_plugin_cpt_settings',
+      'option_name' => 'guisopo_plugin_cpt', // Should be identical to page arg in setFields
+      'callback'  => array($this->cpt_callbacks, 'cptSanitize')
+    );
+
+    $this->settings->setSettings( $args );
+  }
+
+  public function setSections() {
+    $args = [
+        [
+          'id' => 'guisopo_cpt_index',
+          'title' => 'Custom Post Types Manager',
+          'callback'  => array($this->cpt_callbacks, 'cptSectionManager'),
+          'page'  => 'guisopo_cpt' // Same as menu-slug in setSubpages()
+        ]
+      ];
+
+      $this->settings->setSections( $args );
+  }
+
+  public function setFields() {
+    $args = array(
+      array(
+        'id' => 'post_type',
+        'title' => 'Custom Post Type ID',
+        'callback'  => array($this->cpt_callbacks, 'textField'),
+        'page'  => 'guisopo_cpt', // Same as menu-slug in setSubpages()
+        'section' => 'guisopo_cpt_index',  // Same as id in setSections()
+        'args' => array(
+          'option_name' => 'guisopo_plugin_cpt', // Same as option_name in setSettings()
+          'label_for' =>  'post_type', // Label should always get the ID in order to get that option for the callback
+          'placeholder' => 'eg. product'
+        )
+      ),
+      array(
+        'id' => 'singular_name',
+        'title' => 'Singular Name',
+        'callback'  => array($this->cpt_callbacks, 'textField'),
+        'page'  => 'guisopo_cpt', 
+        'section' => 'guisopo_cpt_index',
+        'args' => array(
+          'option_name' => 'guisopo_plugin_cpt', 
+          'label_for' =>  'singular_name',
+          'placeholder' => 'eg. Product'
+        )
+      ),
+      array(
+        'id' => 'plural_name',
+        'title' => 'Plural Name',
+        'callback'  => array($this->cpt_callbacks, 'textField'),
+        'page'  => 'guisopo_cpt',
+        'section' => 'guisopo_cpt_index',
+        'args' => array(
+          'option_name' => 'guisopo_plugin_cpt',
+          'label_for' =>  'plural_name',
+          'placeholder' => 'eg. Products'
+        )
+      ),
+      array(
+        'id' => 'public',
+        'title' => 'Public',
+        'callback'  => array($this->cpt_callbacks, 'checkboxField'),
+        'page'  => 'guisopo_cpt',
+        'section' => 'guisopo_cpt_index',
+        'args' => array(
+          'option_name' => 'guisopo_plugin_cpt',
+          'label_for' =>  'public',
+          'class' => 'ui-toggle'
+        )
+      ),
+      array(
+        'id' => 'has_archive',
+        'title' => 'Has Archive',
+        'callback'  => array($this->cpt_callbacks, 'checkboxField'),
+        'page'  => 'guisopo_cpt',
+        'section' => 'guisopo_cpt_index',
+        'args' => array(
+          'option_name' => 'guisopo_plugin_cpt',
+          'label_for' =>  'has_archive',
+          'class' => 'ui-toggle'
+        )
+      )
+    );
+
+      $this->settings->setFields( $args );
   }
 
   public function storeCustomPostTypes() {

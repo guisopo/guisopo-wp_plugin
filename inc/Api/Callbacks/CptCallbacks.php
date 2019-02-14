@@ -40,13 +40,18 @@ class CptCallbacks
   public function textField( $args ) {
     $name = $args['label_for'];
     $option_name = $args['option_name'];
-    $input = get_option($option_name);
+    $value = '';
+    
+    if( isset($_POST['edit_post']) ) {
+      $input = get_option($option_name);
+      $value = $input[ $_POST['edit_post'] ][$name];
+    }
 
     echo '<input  text="type" 
                   class="regular-text" 
                   id="' . $name . '" 
                   name="' . $option_name . '[' . $name . ']" 
-                  value="" 
+                  value="' . $value . '" 
                   placeholder="' . $args['placeholder'] . '"
                   required 
           >';
@@ -57,14 +62,19 @@ class CptCallbacks
 		$name = $args['label_for'];
 		$classes = $args['class'];
 		$option_name = $args['option_name'];
-    $checkbox = get_option( $option_name );
+    $checked = '';
+
+    if( isset($_POST['edit_post']) ) {
+      $checkbox = get_option($option_name);
+      $checked = isset( $checkbox[ $_POST['edit_post'] ][$name] ) ?: false;
+    }
     
     echo '<div class="' . $classes . '">
             <input  type="checkbox" 
                     id="' . $name . '" 
                     name="' . $option_name . '[' . $name . ']" 
                     value="1" 
-                    class="">
+                    class="" ' . ($checked ? 'checked' : '') . '>
             <label  for="' . $name . '">
               <div></div>
             </label>

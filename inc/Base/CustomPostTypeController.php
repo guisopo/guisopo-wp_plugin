@@ -155,7 +155,8 @@ class CustomPostTypeController extends BaseController
   }
 
   public function storeCustomPostTypes() {
-    $options = get_option('guisopo_plugin_cpt');
+    
+    $options = ( get_option('guisopo_plugin_cpt') ) ?: array();
 
     foreach($options as $option) {
       $this->custom_post_types[] = array(

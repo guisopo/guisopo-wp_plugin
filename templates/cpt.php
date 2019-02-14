@@ -25,7 +25,34 @@
       foreach ($options as $option) {
         $public = isset($option['public']) ? "TRUE" : "FALSE";
         $archive = isset($option['has_archive']) ? "TRUE" : "FALSE";
-        echo "<tr><td>{$option['post_type']}</td><td>{$option['singular_name']}</td><td>{$option['plural_name']}</td><td class=\"text-center\">{$public}</td><td class=\"text-center\">{$archive}</td><td class=\"text-center\"><a href=\"#\">EDIT</a> - <a href=\"#\">DELETE</a></td></tr>";
+        echo "<tr>
+                <td>{$option['post_type']}</td>
+                <td>{$option['singular_name']}</td>
+                <td>{$option['plural_name']}</td>
+                <td class=\"text-center\">{$public}</td>
+                <td class=\"text-center\">{$archive}</td>
+                <td class=\"text-center\">
+                  <a href=\"#\" onClick=\"console.log|(\"hola\")\">EDIT</a> ";
+
+        echo '<form method="post" 
+                    action="options.php" 
+                    class="inline-block"
+              >';
+
+        settings_fields( 'guisopo_plugin_cpt_settings' );
+
+        submit_button( 'Delete', 'delete small', 'submit', false, array(
+          'onclick' => 'return confirm(\'Are you sure you want to delete the ' .$option['post_type']. ' Post Type?\nWARNING: Any associated with this Post Type will be removed.\'); '
+        ));
+
+        echo('<input  type="hidden"
+                      name="remove"
+                      value="' . $option['post_type'] . '"
+              >');
+
+        echo "    </form>
+                </td>
+              </tr>";
       }
       echo '</table>';
      ?>

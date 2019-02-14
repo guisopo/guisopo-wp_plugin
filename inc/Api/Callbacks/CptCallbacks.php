@@ -15,6 +15,12 @@ class CptCallbacks
   public function cptSanitize( $input ) {
     $output = get_option('guisopo_plugin_cpt');
 
+    if( isset( $_POST["remove"] ) ) {
+      unset($output[$_POST["remove"]]);
+      return $output;
+    }
+
+
     if( count($output) == 0 ) {
       $output[$input['post_type']] = $input;
 
@@ -42,6 +48,7 @@ class CptCallbacks
                   name="' . $option_name . '[' . $name . ']" 
                   value="" 
                   placeholder="' . $args['placeholder'] . '"
+                  required 
           >';
 
   }

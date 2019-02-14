@@ -14,6 +14,12 @@ class CptCallbacks
 
   public function cptSanitize( $input ) {
     $output = get_option('guisopo_plugin_cpt');
+
+    if( count($output) == 0 ) {
+      $output[$input['post_type']] = $input;
+
+      return $output;
+    }
     
     foreach ($output as $key => $value) {
       if ($input['post_type'] === $key) {

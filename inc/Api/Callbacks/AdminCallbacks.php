@@ -8,43 +8,53 @@ use Inc\Base\BaseController;
 
 class AdminCallbacks extends BaseController
 {
-  public function adminDashboard() {
+  public function adminDashboard() 
+  {
     return require_once("$this->plugin_path/templates/admin.php");
   }
   
-  public function adminCpt() {
+  public function adminCpt() 
+  {
     return require_once("$this->plugin_path/templates/cpt.php");
   }
 
-  public function adminTaxonomy() {
-    echo '<h1>Taxonomy Admin Board</h1>';
+  public function adminTaxonomy() 
+  {
+    return require_once("$this->plugin_path/templates/taxonomy.php");
   }
 
-  public function adminWidget() {
+  public function adminWidget() 
+  {
     echo '<h1>Widget Admin Board</h1>';
   }
 
-  public function adminGallery() {
+  public function adminGallery() 
+  {
     echo '<h1>Gallery Admin Board</h1>';
   }
 
-  public function adminTestimonial() {
+  public function adminTestimonial() 
+  {
     echo '<h1>Testimonial Admin Board</h1>';
   }
 
-  public function adminTemplate() {
+  public function adminTemplate() 
+  {
     echo '<h1>Template Admin Board</h1>';
   }
 
-  public function adminAuth() {
+  public function adminAuth() 
+  {
     echo '<h1>Login Manager</h1>';
   }
 
-  public function adminChat() {
+  public function adminChat() 
+  {
     echo '<h1>Chat Manager</h1>';
   }
 
-  public function adminMembership() {
+  public function adminMembership() 
+  {
     echo '<h1>Membership Manager</h1>';
   }
 }

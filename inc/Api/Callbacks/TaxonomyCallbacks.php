@@ -6,16 +6,16 @@ namespace Inc\Api\Callbacks;
 
 use \Inc\Api\Callbacks;
 
-class CptCallbacks
+class TaxonomyCallbacks
 {
-  public function cptSectionManager() 
+  public function taxSectionManager() 
   {
-    echo 'Manage your Custom Post Types';
+    echo 'Create your custom taxonomies';
   }
 
-  public function cptSanitize( $input ) 
+  public function taxSanitize( $input ) 
   {
-    $output = get_option('guisopo_plugin_cpt');
+    $output = get_option('guisopo_plugin_tax');
 
     if( isset( $_POST["remove"] ) ) {
       unset($output[$_POST["remove"]]);
@@ -24,16 +24,16 @@ class CptCallbacks
 
 
     if( count($output) == 0 ) {
-      $output[$input['post_type']] = $input;
+      $output[$input['taxonomy']] = $input;
 
       return $output;
     }
     
     foreach ($output as $key => $value) {
-      if ($input['post_type'] === $key) {
+      if ($input['taxonomy'] === $key) {
         $output[$key] = $input;
 			} else {
-        $output[$input['post_type']] = $input;
+        $output[$input['taxonomy']] = $input;
 			}
     }
     return $output;
@@ -45,9 +45,9 @@ class CptCallbacks
     $option_name = $args['option_name'];
     $value = '';
     
-    if( isset($_POST['edit_post']) ) {
+    if( isset($_POST['edit_taxonomy']) ) {
       $input = get_option($option_name);
-      $value = $input[ $_POST['edit_post'] ][$name];
+      $value = $input[ $_POST['edit_taxonomy'] ][$name];
     }
 
     echo '<input  text="type" 
@@ -68,9 +68,9 @@ class CptCallbacks
 		$option_name = $args['option_name'];
     $checked = '';
 
-    if( isset($_POST['edit_post']) ) {
+    if( isset($_POST['edit_taxonomy']) ) {
       $checkbox = get_option($option_name);
-      $checked = isset( $checkbox[ $_POST['edit_post'] ][$name] ) ?: false;
+      $checked = isset( $checkbox[ $_POST['edit_taxonomy'] ][$name] ) ?: false;
     }
     
     echo '<div class="' . $classes . '">
@@ -84,4 +84,5 @@ class CptCallbacks
             </label>
           </div>';
 	}
+
 }

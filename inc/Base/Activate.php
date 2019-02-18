@@ -21,6 +21,10 @@ class Activate
       update_option( 'guisopo_plugin_cpt', $default);
     }
 
+    if( ! get_option( 'guisopo_plugin_tax' ) ) {
+      update_option( 'guisopo_plugin_tax', $default);
+    }
+
     
 
   } 

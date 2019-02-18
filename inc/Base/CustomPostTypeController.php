@@ -19,7 +19,8 @@ class CustomPostTypeController extends BaseController
 
   public $custom_post_types = array();
 
-  public function register() {
+  public function register() 
+  {
     
     // Interrupt if $activated is false
     if( ! $this->activated( 'cpt_manager' ) ) return;
@@ -43,12 +44,14 @@ class CustomPostTypeController extends BaseController
     $this->storeCustomPostTypes();
 
     // Don't registerCpt if the user didn't register any in the DB
-    if( ! empty( $this->custom_post_types ) ) {
+    if( ! empty( $this->custom_post_types ) ) 
+    {
       add_action( 'init', array( $this, 'registerCustomPostTypes' ) );
     }
   }
 
-  public function setSubpages() {
+  public function setSubpages() 
+  {
     $this->subpages = array(
       array(
         'parent_slug' => 'guisopo_plugin',
@@ -61,7 +64,8 @@ class CustomPostTypeController extends BaseController
     );
   }
 
-  public function setSettings() {
+  public function setSettings() 
+  {
 
     $args = array();
 
@@ -74,7 +78,8 @@ class CustomPostTypeController extends BaseController
     $this->settings->setSettings( $args );
   }
 
-  public function setSections() {
+  public function setSections() 
+  {
     $args = [
         [
           'id' => 'guisopo_cpt_index',
@@ -87,7 +92,8 @@ class CustomPostTypeController extends BaseController
       $this->settings->setSections( $args );
   }
 
-  public function setFields() {
+  public function setFields() 
+  {
     $args = array(
       array(
         'id' => 'post_type',
@@ -98,7 +104,8 @@ class CustomPostTypeController extends BaseController
         'args' => array(
           'option_name' => 'guisopo_plugin_cpt', // Same as option_name in setSettings()
           'label_for' =>  'post_type', // Label should always get the ID in order to get that option for the callback
-          'placeholder' => 'eg. product'
+          'placeholder' => 'eg. product',
+          'array' => 'post_type'
         )
       ),
       array(
@@ -110,7 +117,8 @@ class CustomPostTypeController extends BaseController
         'args' => array(
           'option_name' => 'guisopo_plugin_cpt', 
           'label_for' =>  'singular_name',
-          'placeholder' => 'eg. Product'
+          'placeholder' => 'eg. Product',
+          'array' => 'post_type'
         )
       ),
       array(
@@ -122,7 +130,8 @@ class CustomPostTypeController extends BaseController
         'args' => array(
           'option_name' => 'guisopo_plugin_cpt',
           'label_for' =>  'plural_name',
-          'placeholder' => 'eg. Products'
+          'placeholder' => 'eg. Products',
+          'array' => 'post_type'
         )
       ),
       array(
@@ -134,7 +143,8 @@ class CustomPostTypeController extends BaseController
         'args' => array(
           'option_name' => 'guisopo_plugin_cpt',
           'label_for' =>  'public',
-          'class' => 'ui-toggle'
+          'class' => 'ui-toggle',
+          'array' => 'post_type'
         )
       ),
       array(
@@ -146,7 +156,8 @@ class CustomPostTypeController extends BaseController
         'args' => array(
           'option_name' => 'guisopo_plugin_cpt',
           'label_for' =>  'has_archive',
-          'class' => 'ui-toggle'
+          'class' => 'ui-toggle',
+          'array' => 'post_type'
         )
       )
     );
@@ -154,7 +165,8 @@ class CustomPostTypeController extends BaseController
       $this->settings->setFields( $args );
   }
 
-  public function storeCustomPostTypes() {
+  public function storeCustomPostTypes() 
+  {
     
     $options = ( get_option('guisopo_plugin_cpt') ) ?: array();
 
@@ -209,7 +221,8 @@ class CustomPostTypeController extends BaseController
 		
 	}
 
-  public function registerCustomPostTypes() {
+  public function registerCustomPostTypes() 
+  {
 		foreach ($this->custom_post_types as $post_type) {
 			register_post_type( $post_type['post_type'],
 				array(

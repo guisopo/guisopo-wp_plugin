@@ -7,14 +7,22 @@ namespace Inc\Base;
 use \Inc\Api\SettingsApi;
 use \Inc\Base\BaseController;
 use \Inc\Api\Callbacks\AdminCallbacks;
+use \Inc\Api\Callbacks\TaxonomyCallbacks;
 
 class CustomTaxonomyController extends BaseController
 {
+  public $settings;
+
   public $callbacks;
 
-  public $subpages = array();
+  public $tax_callbacks;
 
-  public function register() {
+  public $subpages = array();
+  
+  public $taxonomies = array();
+
+  public function register() 
+  {
     
    // Interrupt if $activated is false
    if( ! $this->activated( 'taxonomy_manager' ) ) return;
@@ -23,12 +31,21 @@ class CustomTaxonomyController extends BaseController
 
     $this->callbacks = new AdminCallbacks();
 
+    $this->tax_callbacks = new TaxonomyCallbacks();
+
     $this->setSubpages();
+
+    $this->setSettings();
+    
+    $this->setSections();
+
+    $this->setFields();
 
     $this->settings->addSubpages( $this->subpages )->register();
   }
 
-  public function setSubpages() {
+  public function setSubpages() 
+  {
     $this->subpages = array(
       array(
         'parent_slug' => 'guisopo_plugin',
@@ -40,4 +57,80 @@ class CustomTaxonomyController extends BaseController
       )
     );
   }
+
+  public function setSettings() 
+  {
+    $args = array(
+      array(
+        'option_group' => 'guisopo_plugin_tax_settings',
+        'option_name' => 'guisopo_plugin_tax',
+        'callback' => array($this->tax_callbacks, 'taxSanitize')
+      )
+    );
+
+    $this->settings->setSettings( $args );
+  }
+
+  public function setSections() 
+  {
+    $args = array(
+      array(
+        'id' => 'guisopo_tax_index',
+        'title' => 'Custom Taxonomy Manager',
+        'callback' => array($this->tax_callbacks, 'taxSectionManager'),
+        'page'  => 'guisopo_taxonomy' // Same as menu_slug in setSubpages
+      )
+    );
+
+    $this->settings->setSections( $args );
+  }
+
+  public function setFields() 
+  {
+    $args = array(
+      array(
+        'id' => 'taxonomy',
+        'title' => 'Custom Taxonomy ID',
+        'callback' => array($this->tax_callbacks, 'textField'),
+        'page'  => 'guisopo_taxonomy', 
+        'section' => 'guisopo_tax_index',
+        'args' => array(
+          'option_name' => 'guisopo_plugin_tax',
+          'label_for' =>  'taxonomy',
+          'placeholder' => 'eg. genre',
+          'array' => 'taxonomy'
+        )
+        ),
+        array(
+          'id' => 'singular_name',
+          'title' => 'Singular Name',
+          'callback'  => array($this->tax_callbacks, 'textField'),
+          'page'  => 'guisopo_taxonomy', 
+          'section' => 'guisopo_tax_index',
+          'args' => array(
+            'option_name' => 'guisopo_plugin_tax', 
+            'label_for' =>  'singular_name',
+            'placeholder' => 'eg. genre',
+            'array' => 'taxonomy'
+          )
+        ),
+        array(
+          'id' => 'hierarchical',
+          'title' => 'Hierarchical',
+          'callback'  => array($this->tax_callbacks, 'checkboxField'),
+          'page'  => 'guisopo_taxonomy',
+          'section' => 'guisopo_tax_index',
+          'args' => array(
+            'option_name' => 'guisopo_plugin_tax',
+            'label_for' => 'hierarchical',
+            'class' => 'ui-toggle',
+            'array' => 'taxonomy'
+          )
+        ),
+    );
+
+    $this->settings->setFields($args);
+  }
+
+  
 }

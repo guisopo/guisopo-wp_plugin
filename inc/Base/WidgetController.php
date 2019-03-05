@@ -5,6 +5,7 @@
 namespace Inc\Base;
 
 use \Inc\Base\BaseController;
+use \Inc\Api\Widgets\MediaWidget;
 
 class WidgetController extends BaseController
 {
@@ -16,6 +17,9 @@ class WidgetController extends BaseController
 
     // Interrupt if $activated is false
     if( ! $this->activated( 'media_widget' ) ) return;
+
+    $media_widget = new MediaWidget();
+    $media_widget->register();
 
   }
 

@@ -4,7 +4,7 @@
  */
 namespace Inc\Base;
 
-use \Inc\Api\Callbacks\AdminCallbacks;
+use \Inc\Base\BaseController;
 
 class WidgetController extends BaseController
 {

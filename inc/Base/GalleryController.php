@@ -16,7 +16,7 @@ class GalleryController extends BaseController
   public function register() {
     
     // Interrupt if $activated is false
-    if( ! $this->activated( 'media_widget' ) ) return;
+    if( ! $this->activated( 'gallery_manager' ) ) return;
 
     $this->settings = new SettingsApi();
 

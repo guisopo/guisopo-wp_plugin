@@ -27,3 +27,29 @@ window.addEventListener("load", function() {
 	}
 
 });
+
+jQuery(document.ready).ready(function($) {
+	$(document).on('click', '.js-image-upload', function(e) {
+		e.preventDefault();
+		var $button = $(this);
+
+		// Contains all the info of the WP Media Uploader
+		var file_frame = wp.media.frames.file_frame = wp.media({
+			title: 'Select or Upload an Image',
+			library: {
+				type: 'image',
+			},
+			button: {
+				text: 'Select Image'
+			},
+			multiple: false
+		});
+
+		file_frame.on('select', function() {
+			var attachemnt = file_frame.state().get('selection').first().toJSON();
+			$button.siblings('.image-upload').val(attachemnt.url);
+		});
+
+		file_frame.open();
+	})
+});

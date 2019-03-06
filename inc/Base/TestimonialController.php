@@ -19,25 +19,29 @@ class TestimonialController extends BaseController
    // Interrupt if $activated is false
    if( ! $this->activated( 'testimonial_manager' ) ) return;
 
-    $this->settings = new SettingsApi();
+   add_action( 'init', array( $this, 'testimonial_cpt' ) );
 
-    $this->callbacks = new AdminCallbacks();
-
-    $this->setSubpages();
-
-    $this->settings->addSubpages( $this->subpages )->register();
   }
 
-  public function setSubpages() {
-    $this->subpages = array(
-      array(
-        'parent_slug' => 'guisopo_plugin',
-        'page_title' => 'Custom Testimonials',
-        'menu_title' => 'Testimonial Manager',
-        'capability' => 'manage_options',
-        'menu_slug' => 'guisopo_testimonial',
-        'callback' => array( $this->callbacks, 'adminTestimonial' )
-      )
+  public function testimonial_cpt() {
+
+    $labels = array(
+      'name' => 'Testimonials',
+      'singular_name' => 'Testimonial'
     );
+
+    $args = array(
+      'labels' => $labels,
+      'public' => true,
+      'archive' => false,
+      'menu_icon' => 'dashicons-testimonial',
+      'exclude_from_search' => true,
+      'publicly_queryable' => false,
+      'supports' => array('title', 'editor')
+    );
+
+    register_post_type( 'testimonials', $args);
+
   }
+
 }

@@ -29,6 +29,15 @@ class TestimonialController extends BaseController
     add_filter( 'manage_edit-testimonial_sortable_columns', array($this, 'set_custom_columns_sortable') );
 
     $this->setShortcodePage();
+
+    add_shortcode( 'testimonial-form', array( $this, 'testimonial_form' ) );
+  }
+
+  public function testimonial_form() {
+    ob_start();
+    require_once( "$this->plugin_path/templates/contact-form.php" );
+    echo "<script src=\"$this->plugin_url/src/js/form.js\"></script>";
+    return ob_get_clean();
   }
 
   public function setShortcodePage() {

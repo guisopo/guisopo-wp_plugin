@@ -48,43 +48,89 @@ class TestimonialController extends BaseController
   public function add_meta_boxes() {
     add_meta_box(
       'testimonial_author', // id
-      'Author', // title
-      array( $this, 'render_author_box' ),  // callback
+      'Testimonial Options', // title
+      array( $this, 'render_features_box' ),  // callback
       'testimonial',  //screen
       'side', // context
       'default' // priority
     );
   }
 
-  public function render_author_box($post) {
+  public function render_features_box($post) {
     // Add an nonce field so we can check for it later.
-    wp_nonce_field( 'guisopo_testimonial_author', 'guisopo_testimonial_author_nonce' );
+    wp_nonce_field( 'guisopo_testimonial', 'guisopo_testimonial_nonce' );
     // Use get_post_meta to retrieve an existing value from the database.
-    $value = get_post_meta( $post->ID, '_guisopo_testimonial_author_key', true );
+    $data = get_post_meta( $post->ID, '_guisopo_testimonial_key', true );
+
+    $name = isset($data['name']) ? $data['name'] : '' ;
+    $email = isset($data['email']) ? $data['email'] : '' ;
+    $approved = isset($data['approved']) ? $data['approved'] : false ;
+    $featured = isset($data['featured']) ? $data['featured'] : false ;
+
     // Display the form, using the current value.
     ?>
     <p>
-      <label class="meta-label" for="guisopo_testimonial_author">Author Name</label>
+      <label class="meta-label" for="guisopo_testimonial_name">Author Name</label>
       <input  type="text" 
-              id="guisopo_testimonial_author" 
-              name="guisopo_testimonial_author"
+              id="guisopo_testimonial_name" 
+              name="guisopo_testimonial_name"
               class="widefat"
-              value="<?php echo esc_attr( $value ); ?>">
+              value="<?php echo esc_attr( $name ); ?>">
     </p>
+    <p>
+      <label class="meta-label" for="guisopo_testimonial_email">Author Email</label>
+      <input  type="text" 
+              id="guisopo_testimonial_email" 
+              name="guisopo_testimonial_email"
+              class="widefat"
+              value="<?php echo esc_attr( $email ); ?>">
+    </p>
+    <div class="meta-container">
+			<label class="meta-label w-50 text-left" for="guisopo_testimonial_approved">Approved</label>
+			<div class="text-right w-50 inline">
+				<div class="ui-toggle inline">
+          <input  type="checkbox" 
+                  id="guisopo_testimonial_approved" 
+                  name="guisopo_testimonial_approved" 
+                  value="1" 
+                  <?php echo $approved ? 'checked' : ''; ?>
+          >
+					<label for="guisopo_testimonial_approved">
+            <div></div>
+          </label>
+				</div>
+			</div>
+		</div>
+		<div class="meta-container">
+			<label class="meta-label w-50 text-left" for="guisopo_testimonial_featured">Featured</label>
+			<div class="text-right w-50 inline">
+				<div class="ui-toggle inline">
+          <input  type="checkbox" 
+                  id="guisopo_testimonial_featured" 
+                  name="guisopo_testimonial_featured" 
+                  value="1" 
+                  <?php echo $featured ? 'checked' : ''; ?>
+          >
+					<label for="guisopo_testimonial_featured">
+            <div></div>
+          </label>
+				</div>
+			</div>
+		</div>
 
     <?php
   }
 
   public function save_meta_box($post_id) {
     // Check if our nonce is set.
-    if( !isset( $_POST['guisopo_testimonial_author_nonce'] ) ) {
+    if( !isset( $_POST['guisopo_testimonial_nonce'] ) ) {
       return $post_id;
     }
 
-    $nonce = $_POST['guisopo_testimonial_author_nonce'];
+    $nonce = $_POST['guisopo_testimonial_nonce'];
     
     // Verify that the nonce is valid.
-    if( !wp_verify_nonce( $nonce, 'guisopo_testimonial_author' ) ){
+    if( !wp_verify_nonce( $nonce, 'guisopo_testimonial' ) ){
       return $post_id;
     };
     // If this is an autosave, our form has not been submitted,
@@ -97,8 +143,13 @@ class TestimonialController extends BaseController
       return $post_id;
     }
 
-    $data = sanitize_text_field( $_POST['guisopo_testimonial_author'] ); // same as name field
-    update_post_meta($post_id, '_guisopo_testimonial_author_key', $data);
+    $data = array(
+      'name' => sanitize_text_field( $_POST['guisopo_testimonial_name'] ), // same as input name
+      'email' => sanitize_text_field( $_POST['guisopo_testimonial_email'] ),
+      'approved' => sanitize_text_field( $_POST['guisopo_testimonial_approved'] ),
+      'featured' => sanitize_text_field( $_POST['guisopo_testimonial_featured'] )
+    );
+    update_post_meta($post_id, '_guisopo_testimonial_key', $data);
 
   }
 

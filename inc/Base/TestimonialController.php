@@ -24,6 +24,7 @@ class TestimonialController extends BaseController
    add_action( 'save_post', array( $this, 'save_meta_box' ) );
    add_action( 'manage_testimonial_posts_columns', array($this, 'set_custom_columns' ) );
    add_action( 'manage_testimonial_posts_custom_column', array($this, 'set_custom_columns_data' ), 10, 2 );
+   add_filter( 'manage_edit-testimonial_sortable_columns', array($this, 'set_custom_columns_sortable') );
   }
 
   public function testimonial_cpt() {
@@ -192,6 +193,14 @@ class TestimonialController extends BaseController
         echo $featured;
         break;
     }
+  }
+
+  public function set_custom_columns_sortable($columns) {
+    $columns['name'] = 'name';
+    $columns['approved'] = 'approved';
+    $columns['featured'] = 'featured';
+
+    return $columns;
   }
 
 }

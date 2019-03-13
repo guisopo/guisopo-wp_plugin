@@ -21,8 +21,7 @@ class CustomTaxonomyController extends BaseController
   
   public $taxonomies = array();
 
-  public function register() 
-  {
+  public function register() {
    // Interrupt if $activated is false
     if( ! $this->activated( 'taxonomy_manager' ) ) return;
 
@@ -49,8 +48,7 @@ class CustomTaxonomyController extends BaseController
     }
   }
 
-  public function setSubpages() 
-  {
+  public function setSubpages() {
     $this->subpages = array(
       array(
         'parent_slug' => 'guisopo_plugin',
@@ -63,8 +61,7 @@ class CustomTaxonomyController extends BaseController
     );
   }
 
-  public function setSettings() 
-  {
+  public function setSettings() {
     $args = array(
       array(
         'option_group' => 'guisopo_plugin_tax_settings',
@@ -76,8 +73,7 @@ class CustomTaxonomyController extends BaseController
     $this->settings->setSettings( $args );
   }
 
-  public function setSections() 
-  {
+  public function setSections() {
     $args = array(
       array(
         'id' => 'guisopo_tax_index',
@@ -90,8 +86,7 @@ class CustomTaxonomyController extends BaseController
     $this->settings->setSections( $args );
   }
 
-  public function setFields() 
-  {
+  public function setFields() {
     $args = array(
       array(
         'id' => 'taxonomy',
@@ -150,8 +145,7 @@ class CustomTaxonomyController extends BaseController
     $this->settings->setFields($args);
   }
 
-  public function storeCustomTaxonomies()
-  {
+  public function storeCustomTaxonomies() {
     // get the taxonomies array
 		$options = get_option( 'guisopo_plugin_tax' ) ?: array();
 		// store those info into an array
@@ -182,8 +176,7 @@ class CustomTaxonomyController extends BaseController
 		// register the taxonomy
   }
 
-  public function registerCustomTaxonomy()
-	{
+  public function registerCustomTaxonomy() {
 		foreach ($this->taxonomies as $taxonomy) {
 			$objects = isset($taxonomy['objects']) ? array_keys($taxonomy['objects']) : null;
 			register_taxonomy( $taxonomy['rewrite']['slug'], $objects, $taxonomy );

@@ -19,8 +19,7 @@ class CustomPostTypeController extends BaseController
 
   public $custom_post_types = array();
 
-  public function register() 
-  {
+  public function register() {
     
     // Interrupt if $activated is false
     if( ! $this->activated( 'cpt_manager' ) ) return;
@@ -50,8 +49,7 @@ class CustomPostTypeController extends BaseController
     }
   }
 
-  public function setSubpages() 
-  {
+  public function setSubpages() {
     $this->subpages = array(
       array(
         'parent_slug' => 'guisopo_plugin',
@@ -64,8 +62,7 @@ class CustomPostTypeController extends BaseController
     );
   }
 
-  public function setSettings() 
-  {
+  public function setSettings() {
 
     $args = array();
 
@@ -78,8 +75,7 @@ class CustomPostTypeController extends BaseController
     $this->settings->setSettings( $args );
   }
 
-  public function setSections() 
-  {
+  public function setSections() {
     $args = [
         [
           'id' => 'guisopo_cpt_index',
@@ -165,8 +161,7 @@ class CustomPostTypeController extends BaseController
       $this->settings->setFields( $args );
   }
 
-  public function storeCustomPostTypes() 
-  {
+  public function storeCustomPostTypes() {
     
     $options = ( get_option('guisopo_plugin_cpt') ) ?: array();
 
@@ -221,8 +216,7 @@ class CustomPostTypeController extends BaseController
 		
 	}
 
-  public function registerCustomPostTypes() 
-  {
+  public function registerCustomPostTypes() {
 		foreach ($this->custom_post_types as $post_type) {
 			register_post_type( $post_type['post_type'],
 				array(

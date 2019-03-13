@@ -8,13 +8,11 @@ use \Inc\Api\Callbacks;
 
 class CptCallbacks
 {
-  public function cptSectionManager() 
-  {
+  public function cptSectionManager() {
     echo 'Manage your Custom Post Types';
   }
 
-  public function cptSanitize( $input ) 
-  {
+  public function cptSanitize( $input ) {
     $output = get_option('guisopo_plugin_cpt');
 
     if( isset( $_POST["remove"] ) ) {
@@ -39,8 +37,7 @@ class CptCallbacks
     return $output;
   }
 
-  public function textField( $args ) 
-  {
+  public function textField( $args ) {
     $name = $args['label_for'];
     $option_name = $args['option_name'];
     $value = '';
@@ -61,8 +58,7 @@ class CptCallbacks
 
   }
 
-  public function checkboxField( $args )
-  {
+  public function checkboxField( $args ) {
 		$name = $args['label_for'];
 		$classes = $args['class'];
 		$option_name = $args['option_name'];

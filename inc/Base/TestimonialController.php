@@ -39,9 +39,42 @@ class TestimonialController extends BaseController
   public function submit_testimonial() {
     echo 'Got It!';
     // Sanitize Data
+    $name = sanitize_text_field($_POST['name']);
+    $email = sanitize_email($_POST['email']);
+    $message = sanitize_message($_POST['message']);
     // Store Data into Testimonial CPT
+    $data = array(
+      'name' => $name,
+      'email' => $email,
+      'approved' => 0,
+      'featured' => 0
+    );
+    $args = array(
+      'post-title'   => 'Testimonial from' . $name,
+      'post-content' => $message,
+      'post_author'  => 1,
+      'post-status'  => 'publish',
+      'post_type'    => 'testimonial',
+      'meta_input'   => array(
+        '_guisopo_testimonial_key' => $data
+      )
+    );
     // Send Response
+    $postID = wp_insert_post($args);
 
+    if($postID) {
+      $return = array(
+        'status' => 'success',
+        'ID'     => $postID
+      );
+      wp_send_json($return);
+      wp_die();
+    }
+    
+    $return = array(
+      'status' => 'error'
+    );
+    wp_send_json($return);
 
     wp_die();
   }
@@ -190,7 +223,7 @@ class TestimonialController extends BaseController
 
     $data = array(
       'name' => sanitize_text_field( $_POST['guisopo_testimonial_name'] ), // same as input name
-      'email' => sanitize_text_field( $_POST['guisopo_testimonial_email'] ),
+      'email' => sanitize_email( $_POST['guisopo_testimonial_email'] ),
       'approved' => isset( $_POST['guisopo_testimonial_approved'] ) ? 1 : 0,
       'featured' => isset( $_POST['guisopo_testimonial_featured'] ) ? 1 : 0
     );

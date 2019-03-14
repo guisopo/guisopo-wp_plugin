@@ -39,6 +39,11 @@ document.addEventListener('DOMContentLoaded', function(e) {
       .then(response => {
         resetMessages();
         // Deal with the response
+        if(response === 0 || response === 'error') {
+          testimonialForm.querySelector('.js-form-error').classList.add('show');
+          return;
+        }
+        testimonialForm.querySelector('.js-form-success').classList.add('show');
       });
 
   });

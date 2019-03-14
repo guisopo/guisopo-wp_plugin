@@ -39,11 +39,14 @@ document.addEventListener('DOMContentLoaded', function(e) {
       .then(response => {
         resetMessages();
         // Deal with the response
-        if(response === 0 || response === 'error') {
+        if(response === 0 || response.status === 'error') {
           testimonialForm.querySelector('.js-form-error').classList.add('show');
           return;
         }
         testimonialForm.querySelector('.js-form-success').classList.add('show');
+        name: testimonialForm.querySelector('[name="name"]').value = '';
+      email: testimonialForm.querySelector('[name="email"]').value = '';
+      message: testimonialForm.querySelector('[name="message"]').value = '';
       });
 
   });

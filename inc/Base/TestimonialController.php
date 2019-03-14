@@ -37,11 +37,11 @@ class TestimonialController extends BaseController
   }
 
   public function submit_testimonial() {
-    echo 'Got It!';
+    
     // Sanitize Data
     $name = sanitize_text_field($_POST['name']);
     $email = sanitize_email($_POST['email']);
-    $message = sanitize_message($_POST['message']);
+    $message = sanitize_textarea_field($_POST['message']);
     // Store Data into Testimonial CPT
     $data = array(
       'name' => $name,
@@ -50,8 +50,8 @@ class TestimonialController extends BaseController
       'featured' => 0
     );
     $args = array(
-      'post-title'   => 'Testimonial from' . $name,
-      'post-content' => $message,
+      'post_title'   => 'Testimonial from' . $name,
+      'post_content' => $message,
       'post_author'  => 1,
       'post-status'  => 'publish',
       'post_type'    => 'testimonial',

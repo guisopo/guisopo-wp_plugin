@@ -1,0 +1,26 @@
+#guisopo-testimonial-form {
+  .field-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .field-msg {
+    display: none;
+    position: absolute;
+    left: 2px;
+    bottom: -19px;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+
+    &.show {
+      display: block;
+    }
+  }
+  .error {
+    color: rgb(212, 27, 27);
+  }
+  .success {
+    color: rgb(12, 150, 12);
+  }
+}

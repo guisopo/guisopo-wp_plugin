@@ -34,7 +34,7 @@ class TestimonialController extends BaseController
   }
 
   public function testimonial_form() {
-    ob_start();
+    ob_start(); // Video 43
     require_once( "$this->plugin_path/templates/contact-form.php" );
     echo "<script src=\"$this->plugin_url/src/js/form.js\"></script>";
     return ob_get_clean();
@@ -88,7 +88,7 @@ class TestimonialController extends BaseController
   }
 
   public function render_features_box($post) {
-    // Add an nonce field so we can check for it later.
+    // Add a nonce field so we can check for it later.
     wp_nonce_field( 'guisopo_testimonial', 'guisopo_testimonial_nonce' );
     // Use get_post_meta to retrieve an existing value from the database.
     $data = get_post_meta( $post->ID, '_guisopo_testimonial_key', true );
@@ -180,8 +180,8 @@ class TestimonialController extends BaseController
       'approved' => isset( $_POST['guisopo_testimonial_approved'] ) ? 1 : 0,
       'featured' => isset( $_POST['guisopo_testimonial_featured'] ) ? 1 : 0
     );
-    update_post_meta($post_id, '_guisopo_testimonial_key', $data);
 
+    update_post_meta($post_id, '_guisopo_testimonial_key', $data);
   }
 
   public function set_custom_columns($columns) {

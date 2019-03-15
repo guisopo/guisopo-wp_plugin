@@ -25,5 +25,8 @@
 	</div>
 
 	<input type="hidden" name="action" value="submit_testimonial">
+		<!--	Video 49 
+					We include this WP nonce in our javascript form validation to secure the data from hackers	-->
+	<input type="hidden" name="nonce" value="<?php echo wp_create_nonce("testimonial-nonce") ?>"> 
 
 </form>

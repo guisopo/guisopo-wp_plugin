@@ -37,7 +37,11 @@ class TestimonialController extends BaseController
   }
 
   public function submit_testimonial() {
-    
+    // Check if the request it's safe
+    if(!DOING_AJAX || !check_ajax_referer('testimonial-nonce', 'nonce')) {
+      return $this->return_json('error');
+    }
+
     // Sanitize Data
     $name = sanitize_text_field($_POST['name']);
     $email = sanitize_email($_POST['email']);
@@ -63,16 +67,15 @@ class TestimonialController extends BaseController
     $postID = wp_insert_post($args);
 
     if($postID) {
-      $return = array(
-        'status' => 'success',
-        'ID'     => $postID
-      );
-      wp_send_json($return);
-      wp_die();
+      return $this->return_json('success');
     }
     
+    return $this->return_json('error');
+  }
+
+  public function return_json($status) {
     $return = array(
-      'status' => 'error'
+      'status' => $status
     );
     wp_send_json($return);
 
@@ -103,7 +106,6 @@ class TestimonialController extends BaseController
   }
 
   public function testimonial_cpt() {
-
     $labels = array(
       'name' => 'Testimonials',
       'singular_name' => 'Testimonial'
@@ -247,7 +249,6 @@ class TestimonialController extends BaseController
   }
 
   public function set_custom_columns_data($column, $post_id) {
-
     $data = get_post_meta( $post_id, '_guisopo_testimonial_key', true );
 
     $name = isset($data['name']) ? $data['name'] : '' ;

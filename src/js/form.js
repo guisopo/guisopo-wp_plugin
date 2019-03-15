@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
     let data = {
       name: testimonialForm.querySelector('[name="name"]').value,
       email: testimonialForm.querySelector('[name="email"]').value,
-      message: testimonialForm.querySelector('[name="message"]').value
+      message: testimonialForm.querySelector('[name="message"]').value,
+      nonce: testimonialForm.querySelector('[name="nonce"]').value
     }
     // Validate email address
     if(!data.name) {

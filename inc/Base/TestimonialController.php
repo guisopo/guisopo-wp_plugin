@@ -38,7 +38,7 @@ class TestimonialController extends BaseController
 
   public function submit_testimonial() {
     // Check if the request it's safe
-    if(!DOING_AJAX || !check_ajax_referer('testimonial-nonce', 'nonce')) {
+    if(!DOING_AJAX || !check_ajax_referer('testimonial-nonce', 'nonce', false)) {
       return $this->return_json('error');
     }
 

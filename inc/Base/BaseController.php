@@ -26,7 +26,7 @@ class BaseController
       'taxonomy_manager' => 'Activate Taxonomies Manager',
       'media_widget' => 'Activate Media Widget',
       'gallery_manager' => 'Activate Gallery Manager',
-      'testimonial_manager' => 'Activate Testimonial Manager',
+      'testimonial_manager' => 'Activate Custom Templates',
       'templates_manager' => 'Activate Templates Manager',
       'login_manager' => 'Activate Login Manager',
       'membership_manager' => 'Activate Membership Manager',

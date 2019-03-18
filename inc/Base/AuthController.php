@@ -28,7 +28,7 @@ class AuthController extends BaseController
     $info['user_password'] = $_POST['password']; 
     $info['remember'] = true;
 
-    $user_signon = wp_signon( $info, false);
+    $user_signon = wp_signon( $info, true );
 
     if ( is_wp_error( $user_signon ) ) {
       echo json_encode(

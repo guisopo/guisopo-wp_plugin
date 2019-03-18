@@ -19,11 +19,15 @@ class AuthController extends BaseController
   }
 
   public function enqueue() {
-    wp_enqueue_style( 'authStyle', $this->plugin_url . 'assets/auth.scss' );
+    if( is_user_logged_in() ) return;
+    
+    wp_enqueue_style( 'authStyle', $this->plugin_url . 'assets/auth.css' );
     wp_enqueue_script( 'authScript', $this->plugin_url . 'assets/auth.js' );
   }
 
   public function add_auth_template() {
+    if( is_user_logged_in() ) return;
+
     $file = $this->plugin_path . 'templates/auth.php';
 
     if( file_exists($file) ) {

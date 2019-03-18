@@ -16,11 +16,44 @@ class AuthController extends BaseController
 
     add_action( 'wp_enqueue_scripts', array($this, 'enqueue') );
     add_action( 'wp_head', array($this, 'add_auth_template') );
+    add_action( 'wp_ajax_nopriv_guisopo_login', array($this, 'login') );
+  }
+
+  public function login() {
+    check_ajax_referer( 'ajax-login-nonce', 'guisopo_auth', false );
+
+    $info = array();
+
+    $info['user_login'] = $_POST['username']; 
+    $info['user_password'] = $_POST['password']; 
+    $info['remember'] = true;
+
+    $user_signon = wp_signon( $info, false);
+
+    if ( is_wp_error( $user_signon ) ) {
+      echo json_encode(
+        array(
+          'status' => false,
+          'message' => 'Wrong username or password'
+        )
+      );
+
+      die();
+    }
+
+      echo json_encode(
+        array(
+          'status' => true,
+          'message' => 'Login successful, redirecting...'
+        )
+      );
+
+      die();
   }
 
   public function enqueue() {
     if( is_user_logged_in() ) return;
-    
+
     wp_enqueue_style( 'authStyle', $this->plugin_url . 'assets/auth.css' );
     wp_enqueue_script( 'authScript', $this->plugin_url . 'assets/auth.js' );
   }

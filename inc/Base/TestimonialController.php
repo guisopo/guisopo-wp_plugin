@@ -48,10 +48,10 @@ class TestimonialController extends BaseController
     $message = sanitize_textarea_field($_POST['message']);
     // Store Data into Testimonial CPT
     $data = array(
-      'name' => $name,
-      'email' => $email,
-      'approved' => 0,
-      'featured' => 0
+      'name'      => $name,
+      'email'     => $email,
+      'approved'  => 0,
+      'featured'  => 0
     );
     $args = array(
       'post_title'   => 'Testimonial from' . $name,
@@ -115,18 +115,19 @@ class TestimonialController extends BaseController
 
   public function testimonial_cpt() {
     $labels = array(
-      'name' => 'Testimonials',
+      'name'          => 'Testimonials',
       'singular_name' => 'Testimonial'
     );
 
     $args = array(
-      'labels' => $labels,
-      'public' => true,
-      'has_archive' => false,
-      'menu_icon' => 'dashicons-testimonial',
+      'labels'              => $labels,
+      'public'              => true,
+      'has_archive'         => false,
+      'menu_icon'           => 'dashicons-testimonial',
       'exclude_from_search' => true,
-      'publicly_queryable' => false,
-      'supports' => array('title', 'editor')
+      'publicly_queryable'  => false,
+      'supports'            => array('title', 'editor'),
+      'show_in_rest'        => true
     );
 
     register_post_type( 'testimonial', $args);
@@ -232,10 +233,10 @@ class TestimonialController extends BaseController
     }
 
     $data = array(
-      'name' => sanitize_text_field( $_POST['guisopo_testimonial_name'] ), // same as input name
-      'email' => sanitize_email( $_POST['guisopo_testimonial_email'] ),
-      'approved' => isset( $_POST['guisopo_testimonial_approved'] ) ? 1 : 0,
-      'featured' => isset( $_POST['guisopo_testimonial_featured'] ) ? 1 : 0
+      'name'      => sanitize_text_field( $_POST['guisopo_testimonial_name'] ), // same as input name
+      'email'     => sanitize_email( $_POST['guisopo_testimonial_email'] ),
+      'approved'  => isset( $_POST['guisopo_testimonial_approved'] ) ? 1 : 0,
+      'featured'  => isset( $_POST['guisopo_testimonial_featured'] ) ? 1 : 0
     );
 
     update_post_meta($post_id, '_guisopo_testimonial_key', $data);

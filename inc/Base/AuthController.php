@@ -41,14 +41,14 @@ class AuthController extends BaseController
       die();
     }
 
-      echo json_encode(
-        array(
-          'status' => true,
-          'message' => 'Login successful, redirecting...'
-        )
-      );
+    echo json_encode(
+      array(
+        'status' => true,
+        'message' => 'Login successful, redirecting...'
+      )
+    );
 
-      die();
+    die();
   }
 
   public function enqueue() {

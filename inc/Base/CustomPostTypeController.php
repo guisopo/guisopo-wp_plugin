@@ -53,11 +53,11 @@ class CustomPostTypeController extends BaseController
     $this->subpages = array(
       array(
         'parent_slug' => 'guisopo_plugin',
-        'page_title' => 'Custom Post Types',
-        'menu_title' => 'CPT Manager',
-        'capability' => 'manage_options',
-        'menu_slug' => 'guisopo_cpt',
-        'callback' => array( $this->callbacks, 'adminCpt' )
+        'page_title'  => 'Custom Post Types',
+        'menu_title'  => 'CPT Manager',
+        'capability'  => 'manage_options',
+        'menu_slug'   => 'guisopo_cpt',
+        'callback'    => array( $this->callbacks, 'adminCpt' )
       )
     );
   }
@@ -67,9 +67,9 @@ class CustomPostTypeController extends BaseController
     $args = array();
 
     $args[] = array(
-      'option_group' => 'guisopo_plugin_cpt_settings',
-      'option_name' => 'guisopo_plugin_cpt', // Should be identical to page arg in setFields
-      'callback'  => array($this->cpt_callbacks, 'cptSanitize')
+      'option_group'  => 'guisopo_plugin_cpt_settings',
+      'option_name'   => 'guisopo_plugin_cpt', // Should be identical to page arg in setFields
+      'callback'      => array($this->cpt_callbacks, 'cptSanitize')
     );
 
     $this->settings->setSettings( $args );
@@ -78,10 +78,10 @@ class CustomPostTypeController extends BaseController
   public function setSections() {
     $args = [
         [
-          'id' => 'guisopo_cpt_index',
-          'title' => 'Custom Post Types Manager',
+          'id'        => 'guisopo_cpt_index',
+          'title'     => 'Custom Post Types Manager',
           'callback'  => array($this->cpt_callbacks, 'cptSectionManager'),
-          'page'  => 'guisopo_cpt' // Same as menu-slug in setSubpages()
+          'page'      => 'guisopo_cpt' // Same as menu-slug in setSubpages()
         ]
       ];
 
@@ -92,68 +92,68 @@ class CustomPostTypeController extends BaseController
   {
     $args = array(
       array(
-        'id' => 'post_type',
-        'title' => 'Custom Post Type ID',
+        'id'        => 'post_type',
+        'title'     => 'Custom Post Type ID',
         'callback'  => array($this->cpt_callbacks, 'textField'),
-        'page'  => 'guisopo_cpt', // Same as menu-slug in setSubpages()
-        'section' => 'guisopo_cpt_index',  // Same as id in setSections()
+        'page'      => 'guisopo_cpt', // Same as menu-slug in setSubpages()
+        'section'   => 'guisopo_cpt_index',  // Same as id in setSections()
         'args' => array(
           'option_name' => 'guisopo_plugin_cpt', // Same as option_name in setSettings()
-          'label_for' =>  'post_type', // Label should always get the ID in order to get that option for the callback
+          'label_for'   => 'post_type', // Label should always get the ID in order to get that option for the callback
           'placeholder' => 'eg. product',
-          'array' => 'post_type'
+          'array'       => 'post_type'
         )
       ),
       array(
-        'id' => 'singular_name',
-        'title' => 'Singular Name',
+        'id'        => 'singular_name',
+        'title'     => 'Singular Name',
         'callback'  => array($this->cpt_callbacks, 'textField'),
-        'page'  => 'guisopo_cpt', 
-        'section' => 'guisopo_cpt_index',
+        'page'      => 'guisopo_cpt', 
+        'section'   => 'guisopo_cpt_index',
         'args' => array(
           'option_name' => 'guisopo_plugin_cpt', 
-          'label_for' =>  'singular_name',
+          'label_for'   => 'singular_name',
           'placeholder' => 'eg. Product',
-          'array' => 'post_type'
+          'array'       => 'post_type'
         )
       ),
       array(
-        'id' => 'plural_name',
-        'title' => 'Plural Name',
+        'id'        => 'plural_name',
+        'title'     => 'Plural Name',
         'callback'  => array($this->cpt_callbacks, 'textField'),
-        'page'  => 'guisopo_cpt',
-        'section' => 'guisopo_cpt_index',
+        'page'      => 'guisopo_cpt',
+        'section'   => 'guisopo_cpt_index',
         'args' => array(
           'option_name' => 'guisopo_plugin_cpt',
-          'label_for' =>  'plural_name',
+          'label_for'   =>  'plural_name',
           'placeholder' => 'eg. Products',
-          'array' => 'post_type'
+          'array'       => 'post_type'
         )
       ),
       array(
-        'id' => 'public',
-        'title' => 'Public',
+        'id'        => 'public',
+        'title'     => 'Public',
         'callback'  => array($this->cpt_callbacks, 'checkboxField'),
-        'page'  => 'guisopo_cpt',
-        'section' => 'guisopo_cpt_index',
+        'page'      => 'guisopo_cpt',
+        'section'   => 'guisopo_cpt_index',
         'args' => array(
           'option_name' => 'guisopo_plugin_cpt',
-          'label_for' =>  'public',
-          'class' => 'ui-toggle',
-          'array' => 'post_type'
+          'label_for'   =>  'public',
+          'class'       => 'ui-toggle',
+          'array'       => 'post_type'
         )
       ),
       array(
-        'id' => 'has_archive',
-        'title' => 'Has Archive',
+        'id'        => 'has_archive',
+        'title'     => 'Has Archive',
         'callback'  => array($this->cpt_callbacks, 'checkboxField'),
-        'page'  => 'guisopo_cpt',
-        'section' => 'guisopo_cpt_index',
+        'page'      => 'guisopo_cpt',
+        'section'   => 'guisopo_cpt_index',
         'args' => array(
           'option_name' => 'guisopo_plugin_cpt',
-          'label_for' =>  'has_archive',
-          'class' => 'ui-toggle',
-          'array' => 'post_type'
+          'label_for'   =>  'has_archive',
+          'class'       => 'ui-toggle',
+          'array'       => 'post_type'
         )
       )
     );
@@ -197,7 +197,8 @@ class CustomPostTypeController extends BaseController
 				'filter_items_list'     => 'Filter' . $option['plural_name'] . ' List',
 				'label'                 => $option['singular_name'],
 				'description'           => $option['plural_name'] . 'Custom Post Type',
-				'supports'              => array( 'title', 'editor', 'thumbnail' ),
+        'supports'              => array( 'title', 'editor', 'thumbnail' ),
+        'show_in_rest'          => true,
 				'taxonomies'            => array( 'category', 'post_tag' ),
 				'hierarchical'          => false,
 				'public'                => isset($option['public']) ?: false,
@@ -249,22 +250,23 @@ class CustomPostTypeController extends BaseController
 						'items_list_navigation' => $post_type['items_list_navigation'],
 						'filter_items_list'     => $post_type['filter_items_list']
 					),
-					'label'                     => $post_type['label'],
-					'description'               => $post_type['description'],
-					'supports'                  => $post_type['supports'],
-					'taxonomies'                => $post_type['taxonomies'],
-					'hierarchical'              => $post_type['hierarchical'],
-					'public'                    => $post_type['public'],
-					'show_ui'                   => $post_type['show_ui'],
-					'show_in_menu'              => $post_type['show_in_menu'],
-					'menu_position'             => $post_type['menu_position'],
-					'show_in_admin_bar'         => $post_type['show_in_admin_bar'],
-					'show_in_nav_menus'         => $post_type['show_in_nav_menus'],
-					'can_export'                => $post_type['can_export'],
-					'has_archive'               => $post_type['has_archive'],
-					'exclude_from_search'       => $post_type['exclude_from_search'],
-					'publicly_queryable'        => $post_type['publicly_queryable'],
-					'capability_type'           => $post_type['capability_type']
+					'label'                   => $post_type['label'],
+					'description'             => $post_type['description'],
+          'supports'                => $post_type['supports'],
+          'show_in_rest'            => $post_type['show_in_rest'],
+					'taxonomies'              => $post_type['taxonomies'],
+					'hierarchical'            => $post_type['hierarchical'],
+					'public'                  => $post_type['public'],
+					'show_ui'                 => $post_type['show_ui'],
+					'show_in_menu'            => $post_type['show_in_menu'],
+					'menu_position'           => $post_type['menu_position'],
+					'show_in_admin_bar'       => $post_type['show_in_admin_bar'],
+					'show_in_nav_menus'       => $post_type['show_in_nav_menus'],
+					'can_export'              => $post_type['can_export'],
+					'has_archive'             => $post_type['has_archive'],
+					'exclude_from_search'     => $post_type['exclude_from_search'],
+					'publicly_queryable'      => $post_type['publicly_queryable'],
+					'capability_type'         => $post_type['capability_type']
 				)
 			);
 		}

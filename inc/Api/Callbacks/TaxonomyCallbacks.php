@@ -6,13 +6,11 @@ namespace Inc\Api\Callbacks;
 
 class TaxonomyCallbacks
 {
-  public function taxSectionManager() 
-  {
+  public function taxSectionManager() {
     echo 'Create your custom taxonomies';
   }
 
-  public function taxSanitize( $input ) 
-  {
+  public function taxSanitize( $input ) {
     $output = get_option('guisopo_plugin_tax');
 
     if( isset( $_POST["remove"] ) ) {
@@ -37,8 +35,7 @@ class TaxonomyCallbacks
     return $output;
   }
 
-  public function textField( $args ) 
-  {
+  public function textField( $args ) {
     $name = $args['label_for'];
     $option_name = $args['option_name'];
     $value = '';
@@ -59,8 +56,7 @@ class TaxonomyCallbacks
 
   }
 
-  public function checkboxField( $args )
-  {
+  public function checkboxField( $args ) {
 		$name = $args['label_for'];
 		$classes = $args['class'];
 		$option_name = $args['option_name'];
@@ -83,8 +79,7 @@ class TaxonomyCallbacks
           </div>';
 	}
   
-  public function checkboxPostTypesField( $args )
-  {
+  public function checkboxPostTypesField( $args ) {
     $output = '';
 		$name = $args['label_for'];
 		$classes = $args['class'];

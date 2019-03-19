@@ -8,8 +8,7 @@ use Inc\Base\BaseController;
 
 class ManagerCallbacks extends BaseController
 {
-	public function checkboxSanitize( $input )
-	{
+	public function checkboxSanitize( $input ) {
 		// Video 22
 		$output = array();
 		foreach ( $this->managers as $key => $value ) {
@@ -28,13 +27,11 @@ class ManagerCallbacks extends BaseController
 		return $output;
 	}
 
-	public function adminSectionManager()
-	{
+	public function adminSectionManager() {
 		echo 'Manage the Sections and Features of this Plugin by activating the checkboxes from the following list.';
 	}
 
-	public function checkboxField( $args )
-	{
+	public function checkboxField( $args ) {
 		// Video 22
 		$name = $args['label_for'];
 		$classes = $args['class'];

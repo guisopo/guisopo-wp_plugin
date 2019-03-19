@@ -3,6 +3,7 @@
  * @package GuisopoPlugin
  */
 namespace Inc\Base;
+
 class Activate
 {
   public static function activate() {
@@ -14,15 +15,15 @@ class Activate
     $default = array();
 
     if( ! get_option( 'guisopo_plugin' ) ) {
-      update_option( 'guisopo_plugin', $default);
+      update_option( 'guisopo_plugin', $default );
     }
 
     if( ! get_option( 'guisopo_plugin_cpt' ) ) {
-      update_option( 'guisopo_plugin_cpt', $default);
+      update_option( 'guisopo_plugin_cpt', $default );
     }
 
     if( ! get_option( 'guisopo_plugin_tax' ) ) {
-      update_option( 'guisopo_plugin_tax', $default);
+      update_option( 'guisopo_plugin_tax', $default );
     }
 
     

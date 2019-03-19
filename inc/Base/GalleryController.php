@@ -19,7 +19,6 @@ class GalleryController extends BaseController
     if( ! $this->activated( 'gallery_manager' ) ) return;
 
     $this->settings = new SettingsApi();
-
     $this->callbacks = new AdminCallbacks();
 
     $this->setSubpages();
@@ -31,11 +30,11 @@ class GalleryController extends BaseController
     $this->subpages = array(
       array(
         'parent_slug' => 'guisopo_plugin',
-        'page_title' => 'Gallery Manager',
-        'menu_title' => 'Gallery Manager',
-        'capability' => 'manage_options',
-        'menu_slug' => 'guisopo_gallery',
-        'callback' => array( $this->callbacks, 'adminGallery' )
+        'page_title'  => 'Gallery Manager',
+        'menu_title'  => 'Gallery Manager',
+        'capability'  => 'manage_options',
+        'menu_slug'   => 'guisopo_gallery',
+        'callback'    => array( $this->callbacks, 'adminGallery' )
       )
     );
   }

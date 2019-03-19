@@ -33,7 +33,7 @@ class AuthController extends BaseController
     if ( is_wp_error( $user_signon ) ) {
       echo json_encode(
         array(
-          'status' => false,
+          'status'  => false,
           'message' => 'Wrong username or password'
         )
       );
@@ -43,7 +43,7 @@ class AuthController extends BaseController
 
     echo json_encode(
       array(
-        'status' => true,
+        'status'  => true,
         'message' => 'Login successful, redirecting...'
       )
     );

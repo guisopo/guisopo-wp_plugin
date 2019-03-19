@@ -12,11 +12,8 @@ use \Inc\Api\Callbacks\AdminCallbacks;
 class CustomPostTypeController extends BaseController
 {
   public $settings;
-
   public $callbacks;
-
   public $subpages = array();
-
   public $custom_post_types = array();
 
   public function register() {
@@ -25,9 +22,7 @@ class CustomPostTypeController extends BaseController
     if( ! $this->activated( 'cpt_manager' ) ) return;
 
     $this->settings = new SettingsApi();
-
     $this->callbacks = new AdminCallbacks();
-    
     $this->cpt_callbacks = new CptCallbacks();
 
     $this->setSubpages();

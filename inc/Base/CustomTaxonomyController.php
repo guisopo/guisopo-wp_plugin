@@ -12,13 +12,9 @@ use Inc\Api\Callbacks\TaxonomyCallbacks;
 class CustomTaxonomyController extends BaseController
 {
   public $settings;
-
   public $callbacks;
-
   public $tax_callbacks;
-
   public $subpages = array();
-  
   public $taxonomies = array();
 
   public function register() {
@@ -26,9 +22,7 @@ class CustomTaxonomyController extends BaseController
     if( ! $this->activated( 'taxonomy_manager' ) ) return;
 
     $this->settings = new SettingsApi();
-
     $this->callbacks = new AdminCallbacks();
-
     $this->tax_callbacks = new TaxonomyCallbacks();
 
     $this->setSubpages();

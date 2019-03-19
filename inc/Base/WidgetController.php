@@ -10,7 +10,6 @@ use \Inc\Api\Widgets\MediaWidget;
 class WidgetController extends BaseController
 {
   public $callbacks;
-
   public $subpages = array();
 
   public function register() {
@@ -20,7 +19,6 @@ class WidgetController extends BaseController
 
     $media_widget = new MediaWidget();
     $media_widget->register();
-
   }
 
 }

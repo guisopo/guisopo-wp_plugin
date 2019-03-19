@@ -11,7 +11,6 @@ use \Inc\Api\Callbacks\AdminCallbacks;
 class MembershipController extends BaseController
 {
   public $callbacks;
-
   public $subpages = array();
 
   public function register() {
@@ -20,7 +19,6 @@ class MembershipController extends BaseController
    if( ! $this->activated( 'membership_manager' ) ) return;
 
     $this->settings = new SettingsApi();
-
     $this->callbacks = new AdminCallbacks();
 
     $this->setSubpages();
@@ -32,11 +30,11 @@ class MembershipController extends BaseController
     $this->subpages = array(
       array(
         'parent_slug' => 'guisopo_plugin',
-        'page_title' => 'Membership Manager',
-        'menu_title' => 'Membership Manager',
-        'capability' => 'manage_options',
-        'menu_slug' => 'guisopo_membership',
-        'callback' => array( $this->callbacks, 'adminMembership' )
+        'page_title'  => 'Membership Manager',
+        'menu_title'  => 'Membership Manager',
+        'capability'  => 'manage_options',
+        'menu_slug'   => 'guisopo_membership',
+        'callback'    => array( $this->callbacks, 'adminMembership' )
       )
     );
   }

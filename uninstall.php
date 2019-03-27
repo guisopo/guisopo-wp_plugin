@@ -25,6 +25,7 @@
 global $wpdb;
 // !!! Check if I need to use prepare() in order to escape variables passed to SQL. page 117 WP book
 // !!! Check if I can use $wpdb->delete($table, $where, $where_format); to delete data. page 121 WP book
+// !!! With $wpdb->delete() I wouldn't need the prepare() function because already does the job
 $wpdb->query( "DELETE FROM wp_posts WHERE post_type = 'book'" );
 $wpdb->query( "DELETE FROM wp_postsmeta WHERE post_id NOT IN (SELECT id FROM wp_posts)" );
 $wpdb->query( "DELETE FROM wp_term_relationships WHERE object_id NOT IN (SELECT id FROM wp_posts)" );

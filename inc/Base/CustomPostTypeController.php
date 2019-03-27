@@ -172,7 +172,7 @@ class CustomPostTypeController extends BaseController
 				'parent_item_colon'     => 'Parent ' . $option['singular_name'],
 				'all_items'             => 'All ' . $option['plural_name'],
 				'add_new_item'          => 'Add New ' . $option['singular_name'],
-				'add_new'               => 'Add New',
+				'add_new'               => 'Add New ' . $option['singular_name'],
 				'new_item'              => 'New ' . $option['singular_name'],
 				'edit_item'             => 'Edit ' . $option['singular_name'],
 				'update_item'           => 'Update ' . $option['singular_name'],

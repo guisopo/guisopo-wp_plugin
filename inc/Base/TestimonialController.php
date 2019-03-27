@@ -151,8 +151,8 @@ class TestimonialController extends BaseController
     // Use get_post_meta to retrieve an existing value from the database.
     $data = get_post_meta( $post->ID, '_guisopo_testimonial_key', true );
 
-    $name = isset($data['name']) ? $data['name'] : '' ;
-    $email = isset($data['email']) ? $data['email'] : '' ;
+    $name     = isset($data['name']) ? $data['name'] : '' ;
+    $email    = isset($data['email']) ? $data['email'] : '' ;
     $approved = isset($data['approved']) ? $data['approved'] : false ;
     $featured = isset($data['featured']) ? $data['featured'] : false ;
 
@@ -260,8 +260,8 @@ class TestimonialController extends BaseController
   public function set_custom_columns_data($column, $post_id) {
     $data = get_post_meta( $post_id, '_guisopo_testimonial_key', true );
 
-    $name = isset($data['name']) ? $data['name'] : '' ;
-    $email = isset($data['email']) ? $data['email'] : '' ;
+    $name     = isset($data['name']) ? $data['name'] : '' ;
+    $email    = isset($data['email']) ? $data['email'] : '' ;
     $approved = ( isset($data['approved']) && $data['approved'] === 1 ) ? '<strong>YES</strong>' :  'NO';
     $featured = ( isset($data['featured']) && $data['featured'] === 1 ) ? '<strong>YES</strong>' :  'NO';
 
@@ -281,7 +281,7 @@ class TestimonialController extends BaseController
   }
 
   public function set_custom_columns_sortable($columns) {
-    $columns['name'] = 'name';
+    $columns['name']     = 'name';
     $columns['approved'] = 'approved';
     $columns['featured'] = 'featured';
 

@@ -153,7 +153,7 @@ class CustomPostTypeController extends BaseController
       )
     );
 
-      $this->settings->setFields( $args );
+    $this->settings->setFields( $args );
   }
 
   public function storeCustomPostTypes() {

@@ -49,7 +49,7 @@ class TaxonomyCallbacks
                   class="regular-text" 
                   id="' . $name . '" 
                   name="' . $option_name . '[' . $name . ']" 
-                  value="' . $value . '" 
+                  value="' . esc_attr($value) . '" 
                   placeholder="' . $args['placeholder'] . '"
                   required 
           >';

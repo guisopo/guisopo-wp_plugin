@@ -57,6 +57,19 @@ class CustomPostTypeController extends BaseController
     );
   }
 
+  public function setSections() {
+    $args = [
+      [
+        'id'        => 'guisopo_cpt_index',
+        'title'     => 'Custom Post Types Manager',
+        'callback'  => array($this->cpt_callbacks, 'cptSectionManager'),
+        'page'      => 'guisopo_cpt' // Same as menu-slug in setSubpages()
+        ]
+      ];
+      
+      $this->settings->setSections( $args );
+  }
+  
   public function setSettings() {
 
     $args = array();
@@ -68,19 +81,6 @@ class CustomPostTypeController extends BaseController
     );
 
     $this->settings->setSettings( $args );
-  }
-
-  public function setSections() {
-    $args = [
-        [
-          'id'        => 'guisopo_cpt_index',
-          'title'     => 'Custom Post Types Manager',
-          'callback'  => array($this->cpt_callbacks, 'cptSectionManager'),
-          'page'      => 'guisopo_cpt' // Same as menu-slug in setSubpages()
-        ]
-      ];
-
-      $this->settings->setSections( $args );
   }
 
   public function setFields() 

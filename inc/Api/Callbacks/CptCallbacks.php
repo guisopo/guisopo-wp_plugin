@@ -20,7 +20,6 @@ class CptCallbacks
       return $output;
     }
 
-
     if( count($output) == 0 ) {
       $output[$input['post_type']] = $input;
 
@@ -34,6 +33,7 @@ class CptCallbacks
         $output[$input['post_type']] = $input;
 			}
     }
+    
     return $output;
   }
 

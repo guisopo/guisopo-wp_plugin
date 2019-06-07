@@ -136,12 +136,12 @@ class TestimonialController extends BaseController
 
   public function add_meta_boxes() {
     add_meta_box(
-      'testimonial_author', // id
-      'Testimonial Options', // title
+      'testimonial_author',                   // id
+      'Testimonial Options',                  // title
       array( $this, 'render_features_box' ),  // callback
-      'testimonial',  //screen
-      'side', // context
-      'default' // priority
+      'testimonial',                          // page
+      'side',                                 // context
+      'default'                               // priority
     );
   }
 
@@ -159,7 +159,7 @@ class TestimonialController extends BaseController
     // Display the form, using the current value.
     ?>
     <p>
-      <label class="meta-label" for="guisopo_testimonial_name">Author Name</label>
+      <label  class="meta-label" for="guisopo_testimonial_name">Author Name</label>
       <input  type="text" 
               id="guisopo_testimonial_name" 
               name="guisopo_testimonial_name"
@@ -167,7 +167,7 @@ class TestimonialController extends BaseController
               value="<?php echo esc_attr( $name ); ?>">
     </p>
     <p>
-      <label class="meta-label" for="guisopo_testimonial_email">Author Email</label>
+      <label  class="meta-label" for="guisopo_testimonial_email">Author Email</label>
       <input  type="text" 
               id="guisopo_testimonial_email" 
               name="guisopo_testimonial_email"
@@ -248,11 +248,11 @@ class TestimonialController extends BaseController
     $date = $columns['date'];
     unset( $columns['title'], $columns['date'] );
 
-    $columns['name'] = 'Author Name';
-    $columns['title'] = $title;
+    $columns['name']     = 'Author Name';
+    $columns['title']    = $title;
     $columns['approved'] = 'Approved';
     $columns['featured'] = 'Featured';
-    $columns['date'] = $date;
+    $columns['date']     = $date;
 
     return $columns;
   }

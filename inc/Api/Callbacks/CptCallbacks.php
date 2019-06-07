@@ -66,7 +66,7 @@ class CptCallbacks
 
     if( isset($_POST['edit_post']) ) {
       $checkbox = get_option($option_name);
-      $checked = isset( $checkbox[ $_POST['edit_post'] ][$name] ) ?: false;
+      $checked  = isset( $checkbox[ $_POST['edit_post'] ][$name] ) ?: false;
     }
     
     echo '<div class="' . $classes . '">

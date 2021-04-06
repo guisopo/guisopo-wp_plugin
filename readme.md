@@ -1,6 +1,6 @@
 # Guisopo Plugin
 
-OOP Wordpress Plugin to handle:
+OOP Wordpress Plugin that handles:
 
 * Modular Admin Area
 * CPT Manager
